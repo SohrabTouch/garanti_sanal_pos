@@ -10,7 +10,7 @@ class PosSettings:
         self.prov_user_id = "PROVAUT"
         self.prov_user_id_3ds = "OOS_PAY"
         self.prov_user_password = "123qweASD/"
-        self.user_id = "GUARANTEE"
+        self.user_id = "PROVAUT"
         self.terminal_id = "30691297"
         self.merchant_id = "7000679"
 
@@ -19,7 +19,7 @@ class PosSettings:
 
         self.store_key = "12345678"
         self.three_d_payment_result_url = "http://localhost:8080/gap_php/threed-payment-result.php"
-        self.card = Card('5406697543211173', 'Test User', '03', '2023', '465')
+        self.card = Card('5406697543211173', 'Test User', '03', '23', '465')
 
     def get_request_url(self):
         if self.request_mode == RequestMode.Test:

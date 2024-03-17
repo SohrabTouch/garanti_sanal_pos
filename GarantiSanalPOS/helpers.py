@@ -22,7 +22,10 @@ class XmlHelper:
 
         root = ET.Element(root_element)
         build_element(root, data)
-        return parseString(ET.tostring(root)).toprettyxml()
+        # Generate the XML string with the declaration, specifying the 'iso-8859-9' encoding
+        xml_str = ET.tostring(root, encoding='iso-8859-9', xml_declaration=True)
+        # Use minidom for pretty printing
+        return parseString(xml_str).toprettyxml(encoding='iso-8859-9').decode('iso-8859-9')
 
     @staticmethod
     def xml_string_to_dict(xml_string):

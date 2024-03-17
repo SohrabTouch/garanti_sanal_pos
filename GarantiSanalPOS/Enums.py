@@ -14,6 +14,10 @@ class MotoInd(Enum):
 
 class CurrencyCode(Enum):
     TL = 949
+    USD = 840
+    EURO = 978
+    GBP = 826
+    JPY = 392
 
 
 class RewardType(Enum):

@@ -11,7 +11,7 @@ class Card:
         self.cvv2 = cvv2
 
     def get_expire_info(self):
-        return f"{int(self.exp_month):02d}{self.exp_year}"
+        return f"{self.exp_year}{int(self.exp_month):02d}"
 
 
 class AmountInfo:
@@ -127,7 +127,7 @@ class Order:
     def __init__(self, customer: Customer = None, address: Address = None, item: OrderItem = None,
                  comment: OrderComment = None, recurring: Recurring = None, transaction: Transaction = None):
         self.order_id = self._create_order_number()
-        self.group_id = self._create_order_number()
+        self.group_id = ''
         self.customer = customer  # An instance of the Customer class
         self.address = address  # An instance of the Address class
         self.items = item
