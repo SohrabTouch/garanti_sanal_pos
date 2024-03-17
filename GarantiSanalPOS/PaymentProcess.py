@@ -5,7 +5,7 @@ import requests
 from fixtures import PosSettings
 from Entities import PaymentRequest, Order, Terminal, Customer, Card, Address, OrderItem, Transaction
 from Enums import RequestMode, AddressType, CurrencyCode, TransactionType, CardholderPresentCode, MotoInd
-from helpers import XmlHelper
+from helpers import XmlHelper, HashGenerator
 
 
 class GarantiPaymentProcess:
@@ -29,13 +29,22 @@ class GarantiPaymentProcess:
             1000
         )
         self.order = Order(self.costumer, self.billing_address, self.order_item)
-        self.hash_data = self.generate_hash_data(
-            self.order.order_id,
+        hash_generator = HashGenerator()
+        self.hash_data = hash_generator.get_hash_data(
+            self.settings.prov_user_password,
             self.settings.terminal_id,
+            self.order.order_id,
             self.settings.card.card_number,
             self.order_item.total_amount,
             CurrencyCode.TL
         )
+        # self.hash_data = self.generate_hash_data(
+        #     self.order.order_id,
+        #     self.settings.terminal_id,
+        #     self.settings.card.card_number,
+        #     self.order_item.total_amount,
+        #     CurrencyCode.TL
+        # )
         self.terminal = Terminal(
             self.settings.prov_user_id,
             self.settings.user_id,
@@ -135,5 +144,5 @@ class GarantiPaymentProcess:
 
     def send(self, data):
         response = requests.post(self.settings.request_url, data=data)
-        json_response = XmlHelper.xml_string_to_dict(response)
-        return json_response
+        json_response = XmlHelper.xml_string_to_dict(response.content)
+        return json_response['GVPSResponse']

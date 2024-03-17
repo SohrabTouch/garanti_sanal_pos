@@ -1,5 +1,7 @@
 import uuid
 from Enums import CardholderPresentCode, MotoInd, CurrencyCode, TransactionType, RequestMode
+from helpers import generate_random_id
+
 
 class Card:
 
@@ -138,8 +140,8 @@ class Order:
 
     def _create_order_number(self):
         # Using uuid4 for generating a unique order ID
-        return 'ef43ef579b97484d9f67d445e4b15b93'
-        # return str(uuid.uuid4())
+        # return 'ef43ef579b97484d9f67d445e4b15b93'
+        return generate_random_id()
 
 
 class PaymentRequest:
